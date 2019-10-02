@@ -1,4 +1,4 @@
-var colorS = ['#ffdedb', '#ffa6b3', '#aca0de', '#839dd4', '#6075db'];
+var colorS = ['#ffdedb', '#ffa6b3', '#c4b5ff', '#9cbbff', '#6075db'];
 // set the color list of the stroke
 
 
@@ -7,15 +7,15 @@ function setup() {
   background('#5a05e3');
   noFill();
 
-  for (var x = -25; x <= windowWidth; x += 15) {
-    for (var y = -25; y <= windowHeight; y += 20) {
+  for (var x = -10; x <= windowWidth; x += 35) {
+    for (var y = -10; y <= windowHeight; y += 35) {
 
       var index = floor(random() * colorS.length);
       var colorHex = colorS[index];
       stroke(color(colorHex));
-      strokeWeight(5);
+      strokeWeight(50);
 
-      arc(x, y, 10, 200, PI - QUARTER_PI, -PI);
+      arc(x, y, 60, 200, PI - QUARTER_PI, -PI);
 
     }
 
@@ -26,11 +26,11 @@ function setup() {
 function draw() {
   noStroke();
   if (mouseIsPressed) {
-    fill(90, 5, 227,180);
+    fill('#5a05e3');
   } else {
-    fill(90, 5, 227,20);
+    noFill();
   }
-  ellipse(mouseX, mouseY, 50, 50);
+  ellipse(mouseX, mouseY, 5, 5);
 }
 
 function windowResized() {
