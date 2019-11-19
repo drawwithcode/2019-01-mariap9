@@ -1,39 +1,55 @@
-var colorS = ['#ffdedb', '#ffa6b3', '#aca0de', '#839dd4', '#6075db'];
-// set the color list of the stroke
 
+var value = 0;
+var mtch;
+
+function preload() {
+  mtch = loadImage("./assets/matches.png");
+}
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  background('#5a05e3');
-  noFill();
-
-  for (var x = -25; x <= windowWidth; x += 15) {
-    for (var y = -25; y <= windowHeight; y += 20) {
-
-      var index = floor(random() * colorS.length);
-      var colorHex = colorS[index];
-      stroke(color(colorHex));
-      strokeWeight(5);
-
-      arc(x, y, 10, 200, PI - QUARTER_PI, -PI);
-
-    }
-
-  }
+  angleMode(DEGREES);
+  noStroke();
+  frameRate(10);
+  setShakeThreshold(30);
 
 }
 
 function draw() {
-  noStroke();
-  if (mouseIsPressed) {
-    fill(90, 5, 227,180);
-  } else {
-    fill(90, 5, 227,20);
-  }
-  ellipse(mouseX, mouseY, 50, 50);
+
+  fill(255, 190, 0, value);
+  ellipse((width / 2) - 3, (height / 2) - 55, 60, 100);
+
+  fill(255, 120, 0, value);
+  ellipse((width / 2) - 3, (height / 2) - 80, 90, 180);
+
+  image(mtch, (width / 2) - 15, (height / 2) - 50, mtch.width / 2, mtch.height / 2);
+
+  var call = "shake me";
+  drawingContext.font = "normal 15px Alata";
+  drawingContext.textAlign = "center";
+  fill(0);
+  text(call, (width / 2) - 15, (height / 2) - 220);
+
+  var call2 = "to light me up";
+  drawingContext.font = "normal 15px Alata";
+  drawingContext.textAlign = "center";
+  fill(0);
+  text(call2, (width / 2) - 15, (height / 2) - 195);
 }
 
-function windowResized() {
 
-  resizeCanvas(windowWidth, windowHeight);
+function deviceShaken() {
+  value++;
+  if (value > 255) {
+    value = 0;
+  }
+}
+
+function touchMoved() {
+  return false;
+}
+
+function touchEnded() {
+  DeviceOrientationEvent.requestPermission();
 }
